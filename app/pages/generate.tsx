@@ -15,6 +15,8 @@ import 'lightgallery/css/lg-zoom.css';
 import 'lightgallery/css/lg-thumbnail.css';
 import lgZoom from 'lightgallery/plugins/zoom';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 
 export function Generate() {
   const [prompt, setPrompt] = useState("");
@@ -150,25 +152,26 @@ export function Generate() {
         </Typography>
       )}
 
-      <LightGallery
-        speed={500}
-        plugins={[lgZoom, lgThumbnail]}
-      >
-        {images.map((src) => (
-          <a key={src} href={src}>
-            <img
-              src={src}
-              alt="Generated"
-              style={{
-                borderRadius: 12,
-                boxShadow: "0 2px 6px rgba(0,0,0,0.14)",
-                maxWidth: "100%",
-                margin: "0.5rem 0",
-                cursor: 'pointer',
-              }}
-            />
-          </a>
-        ))}
+      <LightGallery speed={500} plugins={[lgZoom, lgThumbnail]}>
+        <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
+          {images.map((src) => (
+            <ImageListItem key={src}>
+              <a key={src} href={src}>
+                <img
+                  src={`${src}?w=164&h=164&fit=crop&auto=format`}
+                  srcSet={`${src}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                  alt="Generated"
+                  loading="lazy"
+                  style={{
+                    borderRadius: 12,
+                    boxShadow: "0 2px 6px rgba(0,0,0,0.14)",
+                    cursor: "pointer",
+                  }}
+                />
+              </a>
+            </ImageListItem>
+          ))}
+        </ImageList>
       </LightGallery>
     </Paper>
   );
