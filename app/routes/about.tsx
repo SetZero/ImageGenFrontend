@@ -1,5 +1,5 @@
+import { Box } from "@mui/material";
 import type { Route } from "./+types/home";
-import { Generate } from "../pages/generate";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,6 +8,6 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function Home() {
-  return <Generate />;
+export default function About() {
+  return <Box />;
 }
